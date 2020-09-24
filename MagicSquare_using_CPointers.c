@@ -11,7 +11,7 @@
 #include <stdio.h>		/* for printf */
 #include <stdlib.h>		/* for malloc, free */
 
-// Definitions for improving code readability
+/* Definitions for improving code readability */
 #define IN
 #define OUT
 #define INOUT
@@ -179,7 +179,7 @@ void FillMagicSquare(IN int nValue, INOUT int **ary, IN int nArraySize, INOUT in
 * Author                : Athul Sasi
 * Function description  : Creates the magic square and populates it with integers
 ********************************************************************************/
-void CreateMagicSquare(IN int **ary, IN int nArraySize)
+void CreateMagicSquare(IN int **pp2DArray, IN int nArraySize)
 {
 	int nXCoord		= 0;
 	int nYCoord		= 0;
@@ -190,14 +190,14 @@ void CreateMagicSquare(IN int **ary, IN int nArraySize)
 	int i			= 0; /* Loop index */
 
 	/* Get back the co-ordinates */
-	InitFirstElement(ary, nArraySize, &nXCoord, &nYCoord);
+	InitFirstElement(pp2DArray, nArraySize, &nXCoord, &nYCoord);
 
 	nXLastCoord = nXCoord;
 	nYLastCoord = nYCoord;
 
 	for (i = 2; i <= (nArraySize * nArraySize); ++i) {
 		/* Set values */
-		FillMagicSquare(i, ary, nArraySize, &nXLastCoord, &nYLastCoord);
+		FillMagicSquare(i, pp2DArray, nArraySize, &nXLastCoord, &nYLastCoord);
 	}
 }
 
@@ -207,7 +207,7 @@ void CreateMagicSquare(IN int **ary, IN int nArraySize)
 * Author                : Athul Sasi
 * Function description  : Displays the magic square on the console
 ********************************************************************************/
-void DisplayMagicSquare(IN int **ary, IN int nSize)
+void DisplayMagicSquare(IN int ** pp2DArray, IN int nSize)
 {
 	int i = 0;	/* Loop index */
 	int j = 0;	/* Loop index */
@@ -216,7 +216,7 @@ void DisplayMagicSquare(IN int **ary, IN int nSize)
 		printf("\n-------\n");
 		printf("|");
 		for (j = 0; j < nSize; ++j) {
-			printf("%d", *(*(ary + i) + j));
+			printf("%d", *(*(pp2DArray + i) + j));
 			printf("|");
 		}
 	}
@@ -242,20 +242,19 @@ void main()
 	int sizeX = 5;
 	int sizeY = 7;
 	int sizeX = 7;*/
-
 	
-	int **ary = NULL; // Double pointer used to create the 2D array
+	int **pp2DArray = NULL; /* Double pointer used to create the 2D array */
 
-	printf("Magic square of size %d \n\n", sizeX);
+	printf("E.g. Magic square of size %d \n\n", sizeX);
 
 
-	Allocate2DArray(sizeY, &ary);	// Allocate the 2D array
+	Allocate2DArray(sizeY, &pp2DArray);		/* Allocate the 2D array.					*/
 
-	CreateMagicSquare(ary, sizeY);	// Create the magic square!
+	CreateMagicSquare(pp2DArray, sizeY);	/* Create the magic square!					*/
 
-	DisplayMagicSquare(ary, sizeY); // Diplay the magic square on the console
+	DisplayMagicSquare(pp2DArray, sizeY);	/* Diplay the magic square on the console	*/
 
-	Free2DArray(sizeY, &ary);		// Free the 2D array
+	Free2DArray(sizeY, &pp2DArray);			/* Free the 2D array						*/
 
 
 	printf("\n\nPlease press any key to exit..\n");
